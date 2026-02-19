@@ -80,7 +80,7 @@ mod tests {
 
     #[test]
     fn test_custom_from_err() {
-        let io_err = std::io::Error::new(std::io::ErrorKind::Other, "io error");
+        let io_err = std::io::Error::other("io error");
         let err = Error::custom_from_err(io_err);
         assert!(matches!(err, Error::Custom(_)));
         assert_eq!(err.to_string(), "io error");

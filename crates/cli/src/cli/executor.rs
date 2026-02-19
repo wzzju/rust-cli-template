@@ -4,7 +4,7 @@
 
 use std::io::Read;
 
-use crate::{handlers::search::search_and_render, Result};
+use crate::{Result, handlers::search::search_and_render};
 use clap::CommandFactory;
 
 // region:    --- Run

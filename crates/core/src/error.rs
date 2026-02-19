@@ -15,6 +15,11 @@ pub type Result<T> = core::result::Result<T, Error>;
 // region:    --- Error
 
 /// Core error type for the library.
+///
+/// Note on `From` derivation:
+/// Unlike the CLI crate, we use explicit `#[from]` attributes here because
+/// using `#[from(...)]` on the `Custom` variant disables automatic `From` derivation
+/// for other variants. Therefore, `Regex` also requires an explicit `#[from]`.
 #[derive(Debug, Display, DeriveError, From)]
 pub enum Error {
     /// Returned when an empty pattern is provided.
@@ -23,6 +28,7 @@ pub enum Error {
 
     /// Wraps regex compilation errors.
     #[display("regex error")]
+    #[from]
     Regex(regex::Error),
 
     /// Returned when highlighting spans are invalid.
@@ -67,6 +73,10 @@ impl Error {
 
 // endregion: --- Error Boilerplate
 
+// endregion: --- Error
+
+// region:    --- Tests
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -99,6 +109,21 @@ mod tests {
         assert!(matches!(err, Error::Custom(_)));
         assert_eq!(err.to_string(), "str error");
     }
+
+    #[test]
+    fn test_from_borrowed_string() {
+        let msg = "borrowed string error".to_string();
+        let err: Error = (&msg).into();
+        assert!(matches!(err, Error::Custom(_)));
+        assert_eq!(err.to_string(), "borrowed string error");
+    }
+
+    #[test]
+    fn test_from_regex_error() {
+        let regex_err = regex::Error::Syntax("invalid regex".to_string());
+        let err: Error = regex_err.into();
+        assert!(matches!(err, Error::Regex(_)));
+    }
 }
 
-// endregion: --- Error
+// endregion: --- Tests

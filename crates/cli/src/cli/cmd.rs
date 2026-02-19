@@ -2,13 +2,34 @@
 //!
 //! Defines the command-line arguments and flags using `clap`.
 
-use clap::Parser;
+use clap::{Args, Parser, Subcommand};
 
 // region:    --- Cmd
 
 /// The main command structure for the CLI.
 #[derive(Debug, Parser)]
+#[command(name = "rg", version, about = "A simple grep-like tool")]
 pub struct Cmd {
+    #[command(subcommand)]
+    pub subcmd: Option<SubCommand>,
+}
+
+// endregion: --- Cmd
+
+// region:    --- SubCommand
+
+#[derive(Debug, Subcommand)]
+pub enum SubCommand {
+    /// Search for a pattern in a file.
+    Search(SearchArgs),
+}
+
+// endregion: --- SubCommand
+
+// region:    --- Args
+
+#[derive(Debug, Args)]
+pub struct SearchArgs {
     /// The pattern to search for.
     pub pattern: String,
 
@@ -25,4 +46,4 @@ pub struct Cmd {
     pub path: Option<std::path::PathBuf>,
 }
 
-// endregion: --- Cmd
+// endregion: --- Args

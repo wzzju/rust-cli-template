@@ -10,7 +10,8 @@ type Result<T> = core::result::Result<T, Box<dyn std::error::Error>>;
 
 fn run_cli_with_stdin(pattern: &str, input: &str) -> Result<String> {
     let mut cmd = Command::new(env!("CARGO_BIN_EXE_rg"));
-    cmd.arg(pattern)
+    cmd.arg("search")
+        .arg(pattern)
         .stdin(Stdio::piped())
         .stdout(Stdio::piped());
 

@@ -1,3 +1,8 @@
+//! # CLI Integration Tests
+//!
+//! Tests the CLI binary by spawning it as a subprocess.
+//!
+
 use std::io::Write;
 use std::process::{Command, Stdio};
 
@@ -28,6 +33,9 @@ fn run_cli_with_stdin(pattern: &str, input: &str) -> Result<String> {
 #[test]
 fn cli_reads_stdin_and_outputs_matches() -> Result<()> {
     let output = run_cli_with_stdin("alp", "alpha\nbeta\n")?;
-    assert!(output.contains("alpha"));
+    // The output will contain ANSI codes, splitting "alpha" into "alp" (colored) and "ha" (uncolored).
+    // So we check for the presence of "alp" and "ha" separately.
+    assert!(output.contains("alp"));
+    assert!(output.contains("ha"));
     Ok(())
 }

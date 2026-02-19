@@ -1,5 +1,25 @@
+//! # Search Module
+//!
+//! Implements the core search algorithms: literal string search and regex search.
+
 use crate::{Error, MatchLine, Result};
 
+// region:    --- Literal Search
+
+/// Searches for a literal string pattern in the input.
+///
+/// # Arguments
+///
+/// * `input` - The multi-line string to search.
+/// * `pattern` - The literal string to find.
+///
+/// # Returns
+///
+/// A vector of `MatchLine` structs containing found matches.
+///
+/// # Errors
+///
+/// Returns `Error::EmptyPattern` if the pattern is empty.
 pub fn search_literal(input: &str, pattern: &str) -> Result<Vec<MatchLine>> {
     if pattern.is_empty() {
         return Err(Error::EmptyPattern);
@@ -31,6 +51,26 @@ pub fn search_literal(input: &str, pattern: &str) -> Result<Vec<MatchLine>> {
     Ok(matches)
 }
 
+// endregion: --- Literal Search
+
+// region:    --- Regex Search
+
+/// Searches for a regex pattern in the input.
+///
+/// # Arguments
+///
+/// * `input` - The multi-line string to search.
+/// * `pattern` - The regex pattern to compile.
+/// * `ignore_case` - Whether to enable case-insensitive matching.
+///
+/// # Returns
+///
+/// A vector of `MatchLine` structs containing found matches.
+///
+/// # Errors
+///
+/// Returns `Error::EmptyPattern` if the pattern is empty.
+/// Returns `Error::Regex` if the pattern is invalid.
 pub fn search_regex(input: &str, pattern: &str, ignore_case: bool) -> Result<Vec<MatchLine>> {
     if pattern.is_empty() {
         return Err(Error::EmptyPattern);
@@ -62,6 +102,10 @@ pub fn search_regex(input: &str, pattern: &str, ignore_case: bool) -> Result<Vec
     Ok(matches)
 }
 
+// endregion: --- Regex Search
+
+// region:    --- Tests
+
 #[cfg(test)]
 mod tests {
     type Result<T> = core::result::Result<T, Box<dyn std::error::Error>>;
@@ -84,3 +128,5 @@ mod tests {
         Ok(())
     }
 }
+
+// endregion: --- Tests

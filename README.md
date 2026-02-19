@@ -27,6 +27,29 @@ This project was built using a specific set of AI "skills" to ensure quality, ma
 - `crates/cli`: Handles command-line argument parsing and execution flow.
 - `docs/plans`: Contains the implementation plan used to guide the development.
 
+### Usage
+The `rg` CLI tool supports subcommands. Currently, it provides a `search` subcommand.
+
+**Basic Search (from stdin):**
+```bash
+echo "hello world" | cargo run -- search "world"
+```
+
+**Search in a file:**
+```bash
+cargo run -- search "pattern" <file_path>
+```
+
+**Case-insensitive search:**
+```bash
+cargo run -- search -i "PATTERN" <file_path>
+```
+
+**Regex search:**
+```bash
+cargo run -- search -r "patt.rn" <file_path>
+```
+
 ---
 
 <a id="chinese"></a>
@@ -51,3 +74,26 @@ This project was built using a specific set of AI "skills" to ensure quality, ma
 - `crates/core`: 包含核心搜索逻辑、领域模型和渲染逻辑。
 - `crates/cli`: 处理命令行参数解析和执行流程。
 - `docs/plans`: 包含用于指导开发的实施计划文档。
+
+### 使用方法
+`rg` CLI 工具支持子命令。目前，它提供了一个 `search` 子命令。
+
+**基本搜索 (从标准输入):**
+```bash
+echo "hello world" | cargo run -- search "world"
+```
+
+**在文件中搜索:**
+```bash
+cargo run -- search "pattern" <文件路径>
+```
+
+**不区分大小写搜索:**
+```bash
+cargo run -- search -i "PATTERN" <文件路径>
+```
+
+**正则表达式搜索:**
+```bash
+cargo run -- search -r "patt.rn" <文件路径>
+```

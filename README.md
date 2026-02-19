@@ -28,26 +28,49 @@ This project was built using a specific set of AI "skills" to ensure quality, ma
 - `docs/plans`: Contains the implementation plan used to guide the development.
 
 ### Usage
-The `rg` CLI tool supports subcommands. Currently, it provides a `search` subcommand.
 
-**Basic Search (from stdin):**
+#### Installation
+
+Ensure you have Rust installed. Clone the repository and run:
+
 ```bash
-echo "hello world" | cargo run -- search "world"
+cargo build --release
 ```
 
-**Search in a file:**
+The binary will be available in `target/release/rg`.
+
+#### Commands
+
+This CLI tool supports the following commands:
+
+**1. Search**
+
+Search for a pattern in a file or standard input.
+
 ```bash
-cargo run -- search "pattern" <file_path>
+# Search in a file
+rg search "pattern" file.txt
+
+# Search with regex
+rg search -r "^\d+" file.txt
+
+# Case-insensitive search
+rg search -i "pattern" file.txt
+
+# Search from stdin
+echo "content" | rg search "pattern"
 ```
 
-**Case-insensitive search:**
-```bash
-cargo run -- search -i "PATTERN" <file_path>
-```
+**Options:**
+- `-i, --ignore-case`: Enable case-insensitive matching.
+- `-r, --regex`: Treat the pattern as a regular expression.
 
-**Regex search:**
+#### Documentation
+
+To generate and view the project documentation locally:
+
 ```bash
-cargo run -- search -r "patt.rn" <file_path>
+cargo doc --open --no-deps --workspace
 ```
 
 ---
@@ -75,25 +98,48 @@ cargo run -- search -r "patt.rn" <file_path>
 - `crates/cli`: 处理命令行参数解析和执行流程。
 - `docs/plans`: 包含用于指导开发的实施计划文档。
 
-### 使用方法
-`rg` CLI 工具支持子命令。目前，它提供了一个 `search` 子命令。
+### 使用说明
 
-**基本搜索 (从标准输入):**
+#### 安装
+
+确保已安装 Rust 环境。克隆仓库并运行：
+
 ```bash
-echo "hello world" | cargo run -- search "world"
+cargo build --release
 ```
 
-**在文件中搜索:**
+二进制文件将生成在 `target/release/rg`。
+
+#### 命令
+
+本 CLI 工具支持以下命令：
+
+**1. Search (搜索)**
+
+在文件或标准输入中搜索模式。
+
 ```bash
-cargo run -- search "pattern" <文件路径>
+# 在文件中搜索
+rg search "pattern" file.txt
+
+# 使用正则表达式搜索
+rg search -r "^\d+" file.txt
+
+# 忽略大小写搜索
+rg search -i "pattern" file.txt
+
+# 从标准输入搜索
+echo "content" | rg search "pattern"
 ```
 
-**不区分大小写搜索:**
-```bash
-cargo run -- search -i "PATTERN" <文件路径>
-```
+**选项:**
+- `-i, --ignore-case`: 启用不区分大小写的匹配。
+- `-r, --regex`: 将模式视为正则表达式。
 
-**正则表达式搜索:**
+#### 文档
+
+要在本地生成并查看项目文档：
+
 ```bash
-cargo run -- search -r "patt.rn" <文件路径>
+cargo doc --open --no-deps --workspace
 ```

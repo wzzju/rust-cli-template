@@ -1,0 +1,10 @@
+[package]
+name = "rg-core"
+edition.workspace = true
+version.workspace = true
+license.workspace = true
+
+[dependencies]
+regex.workspace = true
+owo-colors.workspace = true
+derive_more.workspace = true

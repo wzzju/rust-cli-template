@@ -34,10 +34,24 @@ This project was built using a specific set of AI "skills" to ensure quality, ma
 Ensure you have Rust installed. Clone the repository and run:
 
 ```bash
-cargo build --release
+# Build the project using the Cargo.lock file to ensure reproducible builds
+cargo build --release --locked
+
+# Install the binary globally (overwriting if exists) using the lockfile
+cargo install --path crates/cli --force --locked
 ```
 
-The binary will be available in `target/release/rg`.
+To manage installed binaries:
+
+```bash
+# List all installed cargo binaries
+cargo install --list
+
+# Uninstall the binary (use the package name 'rg-cli')
+cargo uninstall rg-cli
+```
+
+The binary will be available in `target/release/rg` (if built) or in your cargo bin path (if installed).
 
 #### Commands
 
@@ -105,10 +119,24 @@ cargo doc --open --no-deps --workspace
 确保已安装 Rust 环境。克隆仓库并运行：
 
 ```bash
-cargo build --release
+# 使用 Cargo.lock 文件构建项目，确保构建的可重现性
+cargo build --release --locked
+
+# 全局安装二进制文件（如果存在则覆盖），使用锁定文件
+cargo install --path crates/cli --force --locked
 ```
 
-二进制文件将生成在 `target/release/rg`。
+管理已安装的二进制文件：
+
+```bash
+# 列出所有已安装的 cargo 二进制文件
+cargo install --list
+
+# 卸载二进制文件（使用包名 'rg-cli'）
+cargo uninstall rg-cli
+```
+
+二进制文件将生成在 `target/release/rg`（如果已构建）或您的 cargo bin 路径中（如果已安装）。
 
 #### 命令
 

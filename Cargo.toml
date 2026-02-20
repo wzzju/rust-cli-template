@@ -5,10 +5,19 @@ resolver = "2"
 [workspace.package]
 edition = "2024"
 version = "0.1.0"
+authors = ["yuchen <yuchen@example.com>"]
 license = "MIT"
 
+# -- Lints
+[workspace.lints.rust]
+unsafe_code = "forbid"
+# unused = { level = "allow", priority = -1 } # For exploratory dev.
+
 [workspace.dependencies]
-clap = { version = "4.5.1", features = ["derive"] }
-regex = "1.10.3"
+# -- App
+clap = { version = "4.5.60", features = ["derive"] }
 owo-colors = "4.0.0"
+
+# -- Libs
 derive_more = { version = "2.1.1", features = ["full"] }
+regex = "1.10.3"

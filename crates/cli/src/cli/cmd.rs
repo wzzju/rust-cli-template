@@ -12,6 +12,10 @@ use clap::{Args, Parser, Subcommand};
 pub struct Cmd {
     #[command(subcommand)]
     pub subcmd: Option<SubCommand>,
+
+    /// Enable verbose logging.
+    #[arg(short, long, global = true)]
+    pub verbose: bool,
 }
 
 // endregion: --- Cmd
@@ -31,11 +35,11 @@ pub enum SubCommand {
 #[derive(Debug, Args)]
 pub struct SearchArgs {
     /// The pattern to search for.
-    pub pattern: String,
+    pub pattern: String, // positional argument
 
     /// Case-insensitive search.
     #[arg(short, long)]
-    pub ignore_case: bool,
+    pub ignore_case: bool, // flag argument
 
     /// Treat the pattern as a regular expression.
     #[arg(short, long)]
@@ -43,7 +47,7 @@ pub struct SearchArgs {
 
     /// The file path to search (optional).
     /// If not provided, reads from stdin.
-    pub path: Option<std::path::PathBuf>,
+    pub path: Option<std::path::PathBuf>, // optional positional argument
 }
 
 // endregion: --- Args

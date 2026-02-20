@@ -40,7 +40,7 @@ pub fn highlight_line(line: &str, spans: &[core::ops::Range<usize>]) -> Result<S
         }
 
         let segment = line.get(span.start..span.end).ok_or(Error::InvalidSpan)?;
-        output.push_str(&segment.red().bold().to_string());
+        output.push_str(&segment.yellow().bold().to_string());
 
         cursor = span.end;
     }

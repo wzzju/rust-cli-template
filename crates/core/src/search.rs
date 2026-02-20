@@ -82,7 +82,7 @@ pub fn search_regex(input: &str, pattern: &str, ignore_case: bool) -> Result<Vec
         pattern.to_string()
     };
 
-    let regex = regex::Regex::new(&full_pattern).map_err(Error::Regex)?;
+    let regex = regex::Regex::new(&full_pattern)?;
     let mut matches = Vec::new();
 
     for (index, line) in input.lines().enumerate() {
